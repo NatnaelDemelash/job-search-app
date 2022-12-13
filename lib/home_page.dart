@@ -3,9 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+import 'util/job_card.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List jobsForYou = [
+    //[companyName, jobsTitle, logoImagePath, hourlyRate]
+    ['Google', 'Frontend Dev.', 'lib/assets/icons/google.png', 85],
+    ['Uber', 'UI/UX Designer', 'lib/assets/icons/uber.png', 45],
+    ['Nike', 'Software Eng.', 'lib/assets/icons/nike.png', 90],
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,10 +115,18 @@ class HomePage extends StatelessWidget {
           SizedBox(height: 20),
 
           Container(
-            height: 200,
-            color: Colors.blue[200],
-          ),
-
+              height: 145,
+              child: ListView.builder(
+                  itemCount: jobsForYou.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return JobCard(
+                      companyName: jobsForYou[index][0],
+                      hourlyRate: jobsForYou[index][3],
+                      jobTitle: jobsForYou[index][1],
+                      logoImagePath: jobsForYou[index][2],
+                    );
+                  })),
           //recently added -> job titles
         ],
       ),
