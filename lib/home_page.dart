@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'util/job_card.dart';
+import 'util/recent_jobs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,13 @@ class _HomePageState extends State<HomePage> {
     ['Google', 'Frontend Dev.', 'lib/assets/icons/google.png', 85],
     ['Uber', 'UI/UX Designer', 'lib/assets/icons/uber.png', 45],
     ['Nike', 'Software Eng.', 'lib/assets/icons/nike.png', 90],
+  ];
+
+  final List recentJobs = [
+    //[companyName, jobsTitle, logoImagePath, hourlyRate]
+    ['Apple', 'Product Dev.', 'lib/assets/icons/apple.png', 60],
+    ['Microsoft', 'Backend Dev.', 'lib/assets/icons/microsoft.png', 85],
+    ['Google', 'Software Eng.', 'lib/assets/icons/google.png', 100],
   ];
   @override
   Widget build(BuildContext context) {
@@ -128,6 +136,28 @@ class _HomePageState extends State<HomePage> {
                     );
                   })),
           //recently added -> job titles
+          SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: Text('Recently Added',
+                style: GoogleFonts.sahitya(
+                    fontSize: 23, fontWeight: FontWeight.w600)),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: ListView.builder(
+                  itemCount: recentJobs.length,
+                  itemBuilder: (context, index) {
+                    return RecentJobCard(
+                      companyName: recentJobs[index][0],
+                      logoImagePath: recentJobs[index][2],
+                      jobTitle: recentJobs[index][1],
+                      hourlyRate: recentJobs[index][3],
+                    );
+                  }),
+            ),
+          )
         ],
       ),
     );
