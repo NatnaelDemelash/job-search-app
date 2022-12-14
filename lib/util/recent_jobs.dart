@@ -1,5 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace, prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class RecentJobCard extends StatelessWidget {
@@ -28,28 +30,49 @@ class RecentJobCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                height: 40,
-                padding: EdgeInsets.all(5),
-                child: Image.asset(logoImagePath),
-                color: Colors.grey[400],
-              ),
-            ),
-            SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(
-                  jobTitle,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    height: 40,
+                    padding: EdgeInsets.all(5),
+                    child: Image.asset(logoImagePath),
+                    color: Colors.grey[400],
+                  ),
                 ),
-                Text(companyName),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      jobTitle,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    Text(companyName),
+                  ],
+                ),
               ],
             ),
-            Text(hourlyRate.toString())
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: Colors.green[700],
+                    borderRadius: BorderRadius.circular(4)),
+                child: Text(
+                  '\$' + hourlyRate.toString() + '/hr',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),
